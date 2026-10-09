@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sai Kiran Sathpadi · Senior Software Engineer</title>
+<meta name="description" content="Sai Kiran Sathpadi (SSK) is a senior software engineer building event-driven backends and data pipelines in Python, FastAPI, RabbitMQ, PostgreSQL and AWS. 6+ years. Hyderabad, India.">
+<meta name="author" content="Sai Kiran Sathpadi">
+<link rel="canonical" href="https://saikiransathpadi.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Sai Kiran Sathpadi · Senior Software Engineer">
+<meta property="og:description" content="Event-driven backends and data pipelines in Python, RabbitMQ, PostgreSQL and AWS.">
+<meta property="og:url" content="https://saikiransathpadi.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#0e1315">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230e1315'/%3E%3Cpath d='M9 6v3M14 6v3M19 6v3M24 6v3M9 23v3M14 23v3M19 23v3M24 23v3' stroke='%2386c5b3' stroke-width='1.6'/%3E%3Crect x='6' y='9' width='21' height='14' rx='2' fill='none' stroke='%2386c5b3' stroke-width='1.6'/%3E%3Ctext x='16.5' y='19.5' text-anchor='middle' font-family='Arial,sans-serif' font-weight='800' font-size='8' fill='%23e4ebe8'%3ESSK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  /* Dark is the default. A saved "light" choice applies before first paint. */
+  try { if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'; } catch (e) {}
+  document.documentElement.classList.add('js');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Sai Kiran Sathpadi","alternateName":"SSK","jobTitle":"Senior Software Engineer","email":"mailto:sathpadisaikiran@gmail.com","url":"https://saikiransathpadi.github.io/","worksFor":{"@type":"Organization","name":"Techolution"},"alumniOf":"National Institute of Technology Calicut","address":{"@type":"PostalAddress","addressLocality":"Hyderabad","addressCountry":"IN"},"knowsAbout":["Python","FastAPI","RabbitMQ","PostgreSQL","AWS","Terraform","Data pipelines","Distributed systems"],"knowsLanguage":["English","Hindi","Telugu"],"sameAs":["https://linkedin.com/in/saikiran-sathpadi/","https://github.com/saikiransathpadi"]}
+</script>
+<style>
+/* Layout: an engineer's datasheet. A 12-col grid where every section is a spec block:
+   a mono label rail on the left, content on the right, hairline rules between blocks.
+   Palette: deep blue-green ink, sage for anything live or interactive, warm sand for
+   numbers. Low contrast between surfaces, comfortable contrast for text. Dark by default. */
+:root {
+  --bg: #0e1315;
+  --panel: #141b1e;
+  --panel-2: #192226;
+  --ink: #e4ebe8;
+  --ink-2: #a5b2af;
+  --ink-3: #74827f;
+  --line: #222c30;
+  --line-strong: #34413f;
+  --accent: #86c5b3;
+  --accent-soft: rgba(134, 197, 179, .12);
+  --warm: #e2b77c;
+  --warm-soft: rgba(226, 183, 124, .12);
+  --grid-dot: rgba(228, 235, 232, .06);
+  --shadow: 0 30px 80px -24px rgba(0, 0, 0, .6);
+
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "IBM Plex Sans", -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --step--1: .8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: clamp(1.35rem, 1.2rem + .7vw, 1.75rem);
+  --step-3: clamp(2rem, 1.5rem + 2.2vw, 3.1rem);
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+  --ease: cubic-bezier(.2, .7, .1, 1);
+  color-scheme: dark;
+}
+:root[data-theme="light"] {
+  --bg: #f2f5f4; --panel: #fbfcfc; --panel-2: #eaefed; --ink: #15201e; --ink-2: #4a5856; --ink-3: #6f7d7a;
+  --line: #d8e0dd; --line-strong: #b6c2bf; --accent: #2f7d6c; --accent-soft: rgba(47, 125, 108, .1);
+  --warm: #976522; --warm-soft: rgba(151, 101, 34, .1); --grid-dot: rgba(21, 32, 30, .08);
+  --shadow: 0 30px 80px -30px rgba(21, 32, 30, .25); color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 400 var(--step-0)/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; overflow-x: hidden;
+  transition: background-color .3s, color .3s;
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+::selection { background: var(--accent); color: var(--bg); }
+.mono { font-family: var(--f-mono); font-size: var(--step--1); letter-spacing: .02em; }
+.label { font-family: var(--f-mono); font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 6px; }
+.skip:focus { top: 12px; }
+
+/* Header */
+.top {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: saturate(1.3) blur(12px); -webkit-backdrop-filter: saturate(1.3) blur(12px);
+  border-bottom: 1px solid transparent; transition: border-color .3s;
+}
+.top.scrolled { border-bottom-color: var(--line); }
+.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.mark { display: flex; align-items: center; gap: 14px; font-family: var(--f-display); font-weight: 700; letter-spacing: -.01em; }
+/* SSK monogram drawn as an IC chip. Pins are a repeating gradient. */
+.logo { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px; border: 1.5px solid var(--accent); border-radius: 4px; color: var(--ink); font-size: .9375rem; line-height: 1.2; font-weight: 800; font-variation-settings: "wdth" 88; letter-spacing: .03em; }
+.logo::before, .logo::after { content: ""; position: absolute; left: 5px; right: 5px; height: 4px; background: repeating-linear-gradient(90deg, var(--accent) 0 2px, transparent 2px 6px); }
+.logo::before { top: -5.5px; }
+.logo::after { bottom: -5.5px; }
+.logo i { width: 6px; height: 6px; border-radius: 50%; background: var(--warm); font-style: normal; }
+.js .logo i { animation: led 3.2s ease-in-out infinite; }
+.mark > span { color: var(--ink-2); font-weight: 500; font-variation-settings: "wdth" 100; }
+.nav { display: flex; gap: 4px; margin-left: auto; }
+.nav a { padding: 6px 12px; border-radius: 6px; color: var(--ink-2); font-size: .9375rem; transition: color .2s, background .2s; }
+.nav a:hover, .nav a[aria-current="true"] { color: var(--ink); background: var(--panel-2); }
+.tools { display: flex; gap: 8px; }
+.icon-btn {
+  height: 36px; min-width: 36px; padding: 0 10px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 1px solid var(--line); border-radius: 8px; color: var(--ink-2); background: var(--panel); transition: border-color .2s, color .2s;
+}
+.icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
+.icon-btn svg { width: 16px; height: 16px; }
+kbd { font-family: var(--f-mono); font-size: .72rem; color: var(--ink-3); }
+.sun { display: block; } .moon { display: none; }
+:root[data-theme="light"] .sun { display: none; } :root[data-theme="light"] .moon { display: block; }
+.menu-btn { display: none; }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(48px, 8vw, 112px) clamp(40px, 6vw, 80px); overflow: hidden; }
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background-image: radial-gradient(var(--grid-dot) 1px, transparent 1.2px); background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 30%, transparent 75%);
+          mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 30%, transparent 75%);
+}
+.hero::after { /* one soft glow behind the figure, nothing louder */
+  content: ""; position: absolute; z-index: -1; width: 640px; height: 640px; right: -120px; top: -80px; border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-soft), transparent 65%);
+}
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }
+.hero-text { container-type: inline-size; min-width: 0; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
+.hero-eyebrow .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: ping 2.4s var(--ease) infinite; }
+.hero h1 {
+  font-family: var(--f-display); font-weight: 800; text-transform: uppercase;
+  /* Sized to its column so the longest line (SATHPADI.) always fits. */
+  font-size: clamp(2.6rem, 14.5cqi, 7.4rem); line-height: .88;
+  font-variation-settings: "wdth" 112; letter-spacing: -.03em;
+}
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .05em; }
+.hero h1 .line > span { display: inline-block; }
+.hero h1 .thin { color: var(--accent); }
+.lead { margin-top: 30px; max-width: 36ch; font-size: var(--step-2); line-height: 1.4; color: var(--ink-2); letter-spacing: -.005em; }
+.lead strong { color: var(--ink); font-weight: 500; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 20px; border-radius: 10px;
+  font-weight: 500; border: 1px solid var(--line-strong); transition: transform .2s var(--ease), background .2s, border-color .2s, color .2s;
+}
+.btn svg { width: 16px; height: 16px; transition: transform .25s var(--ease); }
+.btn:hover svg { transform: translateX(3px); }
+.btn.primary { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+.btn.primary:hover { background: color-mix(in srgb, var(--accent) 88%, var(--ink)); }
+.btn:not(.primary):hover { border-color: var(--ink-2); }
+.btn:active { transform: scale(.98); }
+
+.meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: clamp(48px, 7vw, 88px) 0 0; border-top: 1px solid var(--line); }
+.meta > div { padding: 18px 20px 0 0; display: grid; gap: 4px; }
+.meta > div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+.meta dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
+.meta dt { margin: 0; }
+
+/* Figures: animated system sketches */
+.figure { margin: 0; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px 14px 12px; box-shadow: var(--shadow); }
+.figure-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px; padding: 2px 4px 10px; border-bottom: 1px dashed var(--line); }
+.figure-head .label { white-space: nowrap; }
+.figure .canvas { overflow-x: auto; }
+.figure svg { display: block; width: 100%; height: auto; margin-top: 8px; }
+.figure figcaption { padding: 10px 4px 0; border-top: 1px dashed var(--line); color: var(--ink-3); }
+.node { fill: var(--panel-2); stroke: var(--line-strong); stroke-width: 1; }
+.node.hot { stroke: var(--accent); }
+.wire { fill: none; stroke: var(--line-strong); stroke-width: 1; }
+.flow { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 2 14; animation: flow 1.1s linear infinite; }
+.flow.slow { animation-duration: 1.6s; }
+.ntext { fill: var(--ink); font: 500 11px var(--f-mono); }
+.ntext.dim { fill: var(--ink-3); font-weight: 400; }
+.ntext.warm { fill: var(--warm); }
+.slot { fill: var(--line-strong); animation: slot 2.4s steps(1) infinite; }
+.scale { animation: scale 7s var(--ease) infinite; }
+.scale .node { stroke-dasharray: 3 3; }
+.cyl { fill: var(--panel-2); stroke: var(--line-strong); }
+/* Fig. 2: charts that draw themselves when scrolled into view */
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: clamp(40px, 5vw, 56px); }
+.chart { box-shadow: none; display: grid; grid-template-rows: auto 1fr auto; }
+.chart .axis { fill: none; stroke: var(--line-strong); }
+.chart .grid { fill: none; stroke: var(--line); stroke-dasharray: 2 5; }
+.chart .cap-line { fill: none; stroke: var(--ink-3); stroke-dasharray: 4 4; opacity: .6; }
+.chart .area { fill: var(--accent-soft); transition: opacity 1.2s .2s var(--ease); }
+.chart .gap { fill: var(--warm-soft); transition: opacity 1.2s .6s var(--ease); }
+.chart .qline, .chart .keyset { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.chart .steps, .chart .offset { fill: none; stroke: var(--warm); stroke-width: 2; stroke-linejoin: round; }
+.chart .draw { stroke-dasharray: 1 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.8s var(--ease); }
+.chart .steps.draw, .chart .keyset.draw { transition-delay: .45s; }
+.js .chart:not(.in) .draw { stroke-dashoffset: 1; }
+.js .chart:not(.in) .area, .js .chart:not(.in) .gap { opacity: 0; }
+.chart .scan { stroke: var(--accent); stroke-width: 1; opacity: .35; animation: scan 6s linear infinite; }
+.chart .k-q { fill: var(--accent); } .chart .k-w { fill: var(--warm); }
+
+/* Scroll reveal: added by script only, so content is always visible without JS */
+.reveal { transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+.reveal:not(.in) { opacity: 0; transform: translateY(18px); }
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 30; background: var(--accent); transform-origin: left; transform: scaleX(0); opacity: .8; pointer-events: none; }
+/* Fig. 3: pipeline */
+.stage { fill: var(--panel-2); stroke: var(--line-strong); animation: stage 8.4s linear infinite; }
+.pkt { fill: var(--warm); animation: travel 8.4s linear infinite; }
+.pkt-halo { fill: var(--warm-soft); animation: travel 8.4s linear infinite; }
+.bus { fill: var(--panel-2); stroke: var(--line-strong); stroke-dasharray: 4 4; }
+
+/* Sections */
+.block { border-top: 1px solid var(--line); padding-block: clamp(56px, 8vw, 112px); }
+.block-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 clamp(16px, 3vw, 40px); }
+.rail { grid-column: 1 / span 3; }
+.rail .label { position: sticky; top: 96px; display: flex; align-items: center; gap: 10px; }
+.rail .label::before { content: ""; width: 18px; height: 1px; background: var(--accent); }
+.body { grid-column: 4 / -1; min-width: 0; }
+.block h2 { font-family: var(--f-display); font-size: var(--step-3); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; max-width: 20ch; }
+.block h2 em { font-style: normal; color: var(--accent); }
+.intro { margin-top: 20px; max-width: 64ch; color: var(--ink-2); font-size: var(--step-1); line-height: 1.6; }
+.intro strong { color: var(--ink); font-weight: 500; }
+
+/* Impact numbers */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line-strong); }
+.stat { padding: 22px 20px 4px 0; display: grid; gap: 10px; align-content: start; }
+.stat + .stat { padding-left: 20px; border-left: 1px solid var(--line); }
+.stat b { font-family: var(--f-display); font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.5rem); line-height: 1; font-weight: 700; font-variation-settings: "wdth" 80; letter-spacing: -.03em; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--warm); }
+.stat b small { font-size: .45em; font-weight: 500; color: var(--ink-3); letter-spacing: 0; margin-left: 2px; }
+.stat p { color: var(--ink-2); font-size: .9375rem; line-height: 1.5; }
+.stat .mono { color: var(--ink-3); }
+
+
+/* Experience */
+.jobs { margin-top: clamp(32px, 4vw, 48px); }
+.job { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 8px 32px; padding-block: 36px; border-top: 1px solid var(--line); }
+.job:first-child { border-top-color: var(--line-strong); }
+.job-when { display: grid; gap: 6px; align-content: start; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.job-when .dur { color: var(--ink-3); }
+.badge { justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font: 500 .6875rem var(--f-mono); letter-spacing: .08em; text-transform: uppercase; }
+.job h3 { font-family: var(--f-display); font-size: var(--step-2); font-weight: 600; letter-spacing: -.015em; line-height: 1.15; }
+.job .org { margin-top: 6px; color: var(--ink-2); }
+.job .org span { color: var(--ink-3); }
+.job .context { margin-top: 16px; max-width: 70ch; padding: 14px 16px; border-radius: 10px; background: var(--panel); border: 1px solid var(--line); color: var(--ink-2); font-size: .9375rem; }
+.job .context b { color: var(--ink); font-weight: 500; }
+.job ul.points { margin-top: 18px; display: grid; gap: 10px; max-width: 72ch; }
+.job ul.points li { position: relative; padding-left: 22px; color: var(--ink-2); }
+.job ul.points li::before { content: ""; position: absolute; left: 2px; top: .78em; width: 10px; height: 1px; background: var(--accent); }
+.job li b { color: var(--ink); font-weight: 600; }
+.job .figure { margin-top: 24px; box-shadow: none; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+.tags li { padding: 3px 9px; border: 1px solid var(--line); border-radius: 6px; font: 400 .75rem var(--f-mono); color: var(--ink-2); background: var(--panel); }
+
+/* Capabilities */
+.caps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin-top: clamp(32px, 4vw, 48px); background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.cap { background: var(--bg); padding: clamp(22px, 3vw, 32px); display: grid; gap: 10px; align-content: start; transition: background .25s; }
+.cap:hover { background: var(--panel); }
+.cap svg { width: 28px; height: 28px; color: var(--accent); }
+.cap h3 { font-family: var(--f-display); font-size: var(--step-1); font-weight: 600; letter-spacing: -.01em; }
+.cap p { color: var(--ink-2); font-size: .9375rem; }
+
+/* Skills spec table */
+.legend { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--ink-3); font-size: .875rem; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.spec { margin-top: clamp(24px, 3vw, 36px); border-top: 1px solid var(--line-strong); }
+.spec-row { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 8px 32px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.spec-row dt { margin: 0; padding-top: 4px; }
+.spec-row dd { margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.sk { display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2); font-size: .9375rem; white-space: nowrap; }
+.sk.core { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); background: var(--accent-soft); color: var(--ink); font-weight: 500; }
+.sk.core::before, .legend .core-dot { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.sk.fam { border-style: dashed; color: var(--ink-3); }
+.legend .fam-dot { width: 18px; height: 10px; border: 1px dashed var(--ink-3); border-radius: 999px; }
+.legend .use-dot { width: 18px; height: 10px; border: 1px solid var(--line-strong); border-radius: 999px; }
+
+/* Education */
+.edu { margin-top: clamp(32px, 4vw, 48px); display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+.edu article { border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: grid; gap: 6px; align-content: start; background: var(--panel); }
+.edu article:first-child { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.edu h3 { font-family: var(--f-display); font-size: var(--step-1); font-weight: 600; line-height: 1.25; margin-top: 8px; }
+.edu p { color: var(--ink-2); font-size: .9375rem; }
+.spoken { margin-top: 20px; color: var(--ink-3); }
+
+/* Contact */
+.contact h2 { font-size: clamp(2.4rem, 1.4rem + 4.4vw, 5.2rem); max-width: 14ch; line-height: .95; font-weight: 800; font-variation-settings: "wdth" 112; letter-spacing: -.035em; }
+.channels { margin-top: clamp(36px, 5vw, 56px); border-top: 1px solid var(--line-strong); }
+.channel { display: grid; grid-template-columns: 160px minmax(0, 1fr) auto; align-items: center; gap: 12px 24px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.channel .value { font-size: var(--step-1); font-weight: 500; overflow-wrap: anywhere; }
+.channel a.value { background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat; transition: background-size .35s var(--ease), color .2s; justify-self: start; }
+.channel a.value:hover { background-size: 100% 1px; color: var(--accent); }
+.copy { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line); font: 500 .75rem var(--f-mono); color: var(--ink-2); background: var(--panel); transition: border-color .2s, color .2s; }
+.copy:hover { border-color: var(--accent); color: var(--ink); }
+.copy[data-done] { color: var(--accent); border-color: var(--accent); }
+
+footer { border-top: 1px solid var(--line); padding-block: 28px calc(28px + env(safe-area-inset-bottom, 0px)); color: var(--ink-3); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+footer a:hover { color: var(--ink); }
+
+/* Command palette */
+dialog.palette {
+  width: min(560px, calc(100vw - 32px)); max-height: min(520px, 80vh); padding: 0; margin: 12vh auto auto;
+  border: 1px solid var(--line-strong); border-radius: 14px; background: var(--panel); color: var(--ink); box-shadow: var(--shadow);
+}
+dialog.palette::backdrop { background: rgba(6, 10, 11, .55); backdrop-filter: blur(3px); }
+dialog.palette[open] { animation: pop .22s var(--ease); }
+.pal-input { width: 100%; height: 56px; padding: 0 20px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); font: 400 var(--step-1) var(--f-body); outline: none; }
+.pal-input::placeholder { color: var(--ink-3); }
+.pal-list { padding: 8px; overflow-y: auto; max-height: 420px; }
+.pal-group { padding: 10px 12px 6px; }
+.pal-item { width: 100%; display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 8px; text-align: left; color: var(--ink-2); }
+.pal-item[aria-selected="true"] { background: var(--panel-2); color: var(--ink); }
+.pal-item kbd { margin-left: auto; }
+.pal-empty { padding: 20px 12px; color: var(--ink-3); }
+
+.toast {
+  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); z-index: 50;
+  transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
+  padding: 10px 16px; border-radius: 10px; background: var(--ink); color: var(--bg); font: 500 .8125rem var(--f-mono);
+  transition: opacity .25s, transform .25s var(--ease);
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* Motion: a load sequence, the ambient figures, nothing else. Content is visible at rest. */
+@keyframes rise { from { transform: translateY(105%); } to { transform: none; } }
+@keyframes fade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes flow { to { stroke-dashoffset: -16; } }
+@keyframes slot { 0%, 100% { fill: var(--line-strong); } 50% { fill: var(--accent); } }
+@keyframes scale { 0%, 30% { opacity: .2; } 42%, 82% { opacity: 1; } 94%, 100% { opacity: .2; } }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 var(--accent-soft); } 70%, 100% { box-shadow: 0 0 0 8px transparent; } }
+@keyframes led { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes pop { from { opacity: 0; transform: translateY(-8px) scale(.98); } }
+@keyframes scan { from { transform: translateX(0); } to { transform: translateX(268px); } }
+@keyframes travel { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 92% { transform: translateX(636px); opacity: 1; } 100% { transform: translateX(636px); opacity: 0; } }
+@keyframes stage { 0%, 100% { stroke: var(--line-strong); fill: var(--panel-2); } 3%, 9% { stroke: var(--accent); fill: var(--accent-soft); } 14% { stroke: var(--line-strong); fill: var(--panel-2); } }
+.js .hero h1 .line > span { animation: rise 1s var(--ease) both; }
+.js .hero h1 .line:nth-child(2) > span { animation-delay: .08s; }
+.js .hero .lead, .js .hero .cta, .js .hero .figure, .js .hero .meta { animation: fade .9s var(--ease) both; }
+.js .hero .lead { animation-delay: .25s; }
+.js .hero .cta { animation-delay: .35s; }
+.js .hero .figure { animation-delay: .45s; }
+.js .hero .meta { animation-delay: .55s; }
+.paused * { animation-play-state: paused !important; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .scale { opacity: 1; }
+  .reveal:not(.in) { opacity: 1; transform: none; }
+  .pkt, .pkt-halo { transform: translateX(318px); }
+}
+
+.block { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .rail { grid-column: 1 / -1; margin-bottom: 20px; }
+  .rail .label { position: static; }
+  .body { grid-column: 1 / -1; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); margin-top: 18px; }
+  .edu { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .menu-btn { display: inline-flex; }
+  .tools { margin-left: auto; }
+  .k-hint { display: none; }
+  .meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .meta > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .meta > div:nth-child(n+3) { padding-top: 14px; margin-top: 14px; border-top: 1px solid var(--line); }
+  .job, .spec-row { grid-template-columns: minmax(0, 1fr); }
+  .job-when { grid-auto-flow: column; justify-content: start; align-items: center; gap: 12px; }
+  .caps { grid-template-columns: minmax(0, 1fr); }
+  .channel { grid-template-columns: minmax(0, 1fr) auto; }
+  .channel .label { grid-column: 1 / -1; }
+  .figure .canvas svg.pipe { min-width: 620px; }
+  .charts { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 420px) {
+  .stats { grid-template-columns: minmax(0, 1fr); }
+  .stat + .stat { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); margin-top: 18px; }
+}
+
+@media print {
+  :root { --bg: #fff; --panel: #fff; --panel-2: #fff; --ink: #000; --ink-2: #222; --ink-3: #555; --line: #ccc; --accent: #000; --warm: #000; color-scheme: light; }
+  .top, .figure, .cta, .copy, .toast, dialog, .hero::before, .hero::after, .skip { display: none !important; }
+  .hero-grid, .block-grid { display: block; }
+  .block { padding-block: 24px; content-visibility: visible; }
+  .job { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="mark" href="#main" aria-label="SSK, Sai Kiran Sathpadi, back to top"><b class="logo"><i aria-hidden="true"></i>SSK</b><span class="k-hint">Sai Kiran Sathpadi</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#impact">Impact</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <button class="icon-btn k-hint" type="button" data-open-palette aria-label="Open command menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <kbd data-mod>⌘K</kbd>
+      </button>
+      <button class="icon-btn" type="button" id="theme-toggle" aria-label="Switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="icon-btn menu-btn" type="button" data-open-palette aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="name">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <p class="hero-eyebrow label"><span class="dot" aria-hidden="true"></span>Senior Software Engineer · Backend, Data &amp; Cloud</p>
+          <h1 id="name">
+            <span class="line"><span>Sai Kiran</span></span>
+            <span class="line"><span>Sathpadi<span class="thin">.</span></span></span>
+          </h1>
+          <p class="lead">I build <strong>event-driven backends and data pipelines</strong> that ingest, process and publish at scale. I lead the team that runs them and tune them until they are fast, cost-efficient and quiet in production.</p>
+          <div class="cta">
+            <a class="btn primary" href="#contact">Get in touch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn" href="https://saikiransathpadi.github.io/resume.pdf" target="_blank" rel="noopener">Résumé (PDF)
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <figure class="figure" aria-label="Diagram of the production stack: S3, SQS and API clients feed FastAPI and RabbitMQ, autoscaled Dramatiq workers on ECS write to Kafka, PostgreSQL, OpenSearch and Redis, with Redshift loads and Glue exports alongside">
+          <div class="figure-head"><span class="label">Fig. 1</span><span class="label">the stack, end to end</span></div>
+          <svg viewBox="0 0 560 372" aria-hidden="true">
+            <path class="wire" d="M90 70 C107 70 107 166 124 166"/><path class="wire" d="M90 166 H124"/><path class="wire" d="M90 262 C107 262 107 166 124 166"/>
+            <path class="wire" d="M200 166 H232"/>
+            <path class="wire" d="M316 166 C333 166 333 70 350 70"/><path class="wire" d="M316 166 H350"/><path class="wire" d="M316 166 C333 166 333 262 350 262"/>
+            <path class="wire" d="M430 70 H448 M430 166 H448 M430 262 H448 M448 37 V262 M448 37 H466 M448 103 H466 M448 169 H466 M448 235 H466"/>
+            <path class="flow" d="M90 70 C107 70 107 166 124 166"/><path class="flow slow" d="M90 166 H124"/><path class="flow" d="M90 262 C107 262 107 166 124 166"/>
+            <path class="flow" d="M200 166 H232"/>
+            <path class="flow" d="M316 166 C333 166 333 70 350 70"/><path class="flow slow" d="M316 166 H350"/>
+            <path class="flow slow" d="M430 70 H448"/><path class="flow" d="M430 166 H448"/>
+            <path class="flow" d="M448 103 V37 H466"/><path class="flow slow" d="M448 166 V103 H466"/><path class="flow" d="M448 166 V169 H466"/><path class="flow slow" d="M448 200 V235 H466"/>
+            <g><rect class="node" x="10" y="54" width="80" height="32" rx="6"/><text class="ntext dim" x="50" y="74" text-anchor="middle">s3 · ddex</text></g>
+            <g><rect class="node" x="10" y="150" width="80" height="32" rx="6"/><text class="ntext dim" x="50" y="170" text-anchor="middle">aws sqs</text></g>
+            <g><rect class="node" x="10" y="246" width="80" height="32" rx="6"/><text class="ntext dim" x="50" y="266" text-anchor="middle">api clients</text></g>
+            <text class="ntext dim" x="50" y="36" text-anchor="middle">sources</text>
+            <g><rect class="node hot" x="124" y="141" width="76" height="50" rx="6"/><text class="ntext" x="162" y="170" text-anchor="middle">fastapi</text></g>
+            <g>
+              <rect class="node hot" x="232" y="141" width="84" height="50" rx="6"/>
+              <rect class="slot" x="242" y="153" width="8" height="26" rx="2" style="animation-delay:0s"/>
+              <rect class="slot" x="254" y="153" width="8" height="26" rx="2" style="animation-delay:.4s"/>
+              <rect class="slot" x="266" y="153" width="8" height="26" rx="2" style="animation-delay:.8s"/>
+              <rect class="slot" x="278" y="153" width="8" height="26" rx="2" style="animation-delay:1.2s"/>
+              <rect class="slot" x="290" y="153" width="8" height="26" rx="2" style="animation-delay:1.6s"/>
+              <rect class="slot" x="302" y="153" width="4" height="26" rx="2" style="animation-delay:2s"/>
+              <text class="ntext dim" x="274" y="210" text-anchor="middle">rabbitmq</text>
+              <text class="ntext warm" x="274" y="226" text-anchor="middle">depth ↑</text>
+            </g>
+            <g><rect class="node" x="350" y="54" width="80" height="32" rx="6"/><text class="ntext" x="390" y="74" text-anchor="middle">dramatiq</text></g>
+            <g><rect class="node" x="350" y="150" width="80" height="32" rx="6"/><text class="ntext" x="390" y="170" text-anchor="middle">dramatiq</text></g>
+            <g class="scale">
+              <path class="flow" d="M316 166 C333 166 333 262 350 262"/><path class="flow" d="M430 262 H448"/>
+              <rect class="node" x="350" y="246" width="80" height="32" rx="6"/><text class="ntext" x="390" y="266" text-anchor="middle">worker +n</text>
+            </g>
+            <text class="ntext dim" x="390" y="36" text-anchor="middle">ecs · autoscaled</text>
+            <g><rect class="node hot" x="466" y="22" width="86" height="30" rx="6"/><text class="ntext" x="509" y="41" text-anchor="middle">kafka · avro</text></g>
+            <g><rect class="node" x="466" y="88" width="86" height="30" rx="6"/><text class="ntext" x="509" y="107" text-anchor="middle">postgresql</text></g>
+            <g><rect class="node" x="466" y="154" width="86" height="30" rx="6"/><text class="ntext" x="509" y="173" text-anchor="middle">opensearch</text></g>
+            <g><rect class="node" x="466" y="220" width="86" height="30" rx="6"/><text class="ntext" x="509" y="239" text-anchor="middle">redis</text></g>
+            <text class="ntext dim" x="509" y="272" text-anchor="middle">publish · store</text>
+            <rect class="bus" x="10" y="296" width="542" height="30" rx="6"/>
+            <text class="ntext dim" x="281" y="315" text-anchor="middle">redshift → postgresql loads · aws glue (pyspark) → s3 exports</text>
+            <text class="ntext warm" x="281" y="356" text-anchor="middle">terraform · github actions · new relic · logfire · lambda</text>
+          </svg>
+          <figcaption class="mono">Releases arrive through S3, SQS and the API, queue in RabbitMQ, and are processed by Dramatiq workers that ECS scales on queue depth. Results publish to Kafka and land in PostgreSQL, OpenSearch and Redis.</figcaption>
+        </figure>
+      </div>
+
+      <dl class="meta">
+        <div><dt class="label">Based in</dt><dd>Hyderabad, India</dd></div>
+        <div><dt class="label">Time zone</dt><dd><time id="clock">IST</time></dd></div>
+        <div><dt class="label">Experience</dt><dd><span class="years">6+</span> years</dd></div>
+        <div><dt class="label">Currently</dt><dd>Techolution, for iHeartMedia</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Impact -->
+  <section class="block" id="impact" aria-labelledby="impact-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">Impact</span></div>
+      <div class="body">
+        <h2 id="impact-h">Faster pipelines, quicker queries, <em>less manual work.</em></h2>
+        <p class="intro">A few results from production systems I have built or led. Each number compares the system <strong>before and after my change</strong>, on real workloads.</p>
+        <div class="stats">
+          <div class="stat"><b><span data-count="2">2</span><small>hrs</small></b><p>End-to-end runtime of a data migration that previously took several days.</p><span class="mono">Techolution</span></div>
+          <div class="stat"><b><span data-count="80" data-pre="−">−80</span><small>%</small></b><p>Query latency after profiling and resolving database bottlenecks.</p><span class="mono">Techolution</span></div>
+          <div class="stat"><b><span data-count="10" data-post="k">10k</span><small>+</small></b><p>Users in launch week on a serverless mobile backend built from zero.</p><span class="mono">Bijak</span></div>
+          <div class="stat"><b><span data-count="60" data-pre="−">−60</span><small>%</small></b><p>Manual operations effort after automating payment reconciliation.</p><span class="mono">Bijak</span></div>
+        </div>
+
+        <div class="charts">
+          <figure class="figure chart" aria-label="Chart: as queue depth rises, the number of ECS tasks steps up in bands, then steps back down as the queue drains">
+            <div class="figure-head"><span class="label">Fig. 2a</span><span class="label">scaling on queue depth</span></div>
+            <svg viewBox="0 0 320 206" aria-hidden="true">
+              <path class="grid" d="M36 52 H304 M36 88 H304 M36 124 H304"/>
+              <path class="cap-line" d="M36 46 H304"/><text class="ntext dim" x="304" y="40" text-anchor="end">max tasks</text>
+              <path class="area" d="M36 152 L60 148 L84 120 L108 70 L128 40 L148 36 L170 58 L196 100 L222 132 L246 148 L270 150 L290 140 L304 146 L304 160 L36 160 Z"/>
+              <path class="qline draw" pathLength="1" d="M36 152 L60 148 L84 120 L108 70 L128 40 L148 36 L170 58 L196 100 L222 132 L246 148 L270 150 L290 140 L304 146"/>
+              <path class="steps draw" pathLength="1" d="M36 150 H84 V130 H100 V110 H116 V90 H132 V70 H148 V46 H196 V80 H214 V110 H232 V130 H252 V150 H304"/>
+              <line class="scan" x1="36" y1="20" x2="36" y2="160"/>
+              <path class="axis" d="M36 20 V160 H304"/>
+              <text class="ntext dim" x="304" y="176" text-anchor="end">time →</text>
+              <g class="key"><rect x="36" y="194" width="10" height="3" rx="1.5" class="k-q"/><text class="ntext dim" x="52" y="199">queue depth</text>
+              <rect x="136" y="194" width="10" height="3" rx="1.5" class="k-w"/><text class="ntext dim" x="152" y="199">ecs tasks</text></g>
+            </svg>
+            <figcaption class="mono">Illustrative. Each band of queued messages adds tasks; tasks are released as the queue drains, so capacity follows load instead of peak.</figcaption>
+          </figure>
+          <figure class="figure chart" aria-label="Chart: OFFSET pagination gets slower the deeper the page, keyset pagination stays flat">
+            <div class="figure-head"><span class="label">Fig. 2b</span><span class="label">offset vs keyset pagination</span></div>
+            <svg viewBox="0 0 320 206" aria-hidden="true">
+              <path class="grid" d="M36 52 H304 M36 88 H304 M36 124 H304"/>
+              <path class="gap" d="M36 150 C120 140 200 90 304 28 L304 146 L36 150 Z"/>
+              <path class="offset draw" pathLength="1" d="M36 150 C120 140 200 90 304 28"/>
+              <path class="keyset draw" pathLength="1" d="M36 150 L304 146"/>
+              <text class="ntext warm" x="224" y="56" text-anchor="end">OFFSET n</text>
+              <text class="ntext" x="300" y="138" text-anchor="end">WHERE id &gt; :last</text>
+              <path class="axis" d="M36 20 V160 H304"/>
+              <text class="ntext dim" x="40" y="16">query time</text>
+              <text class="ntext dim" x="304" y="176" text-anchor="end">page depth →</text>
+              <g class="key"><rect x="36" y="194" width="10" height="3" rx="1.5" class="k-w"/><text class="ntext dim" x="52" y="199">offset scan</text>
+              <rect x="136" y="194" width="10" height="3" rx="1.5" class="k-q"/><text class="ntext dim" x="152" y="199">keyset seek</text></g>
+            </svg>
+            <figcaption class="mono">Illustrative. OFFSET reads and discards every skipped row, so deep pages slow down. Seeking from the last key stays flat at any depth.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section class="block" id="experience" aria-labelledby="exp-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">Experience</span></div>
+      <div class="body">
+        <h2 id="exp-h">Systems that ship, scale and stay up.</h2>
+        <div class="jobs">
+          <article class="job">
+            <div class="job-when mono"><span class="badge">Current</span><span>Oct 2023 – Present</span><span class="dur" data-from="2023-10">3 yrs</span></div>
+            <div>
+              <h3>Senior Software Engineer</h3>
+              <p class="org">Techolution, Hyderabad <span>· client: iHeartMedia, US</span></p>
+              <p class="context">I work on iHeartMedia's <b>music catalog and ingestion platform</b>. Record labels and distributors deliver DDEX ERN releases with audio. The platform validates, normalizes, enriches, rights-checks and transcodes that content, then publishes tracks, albums and artists to downstream systems.</p>
+              <ul class="points">
+                <li><b>Lead and mentor the engineering team</b> on the platform: drive technical design, review pull requests, plan work with US stakeholders, and coach engineers to own features end to end.</li>
+                <li>Own core stages of a <b>Python, event-driven ingestion pipeline</b> built on FastAPI, Dramatiq actors over RabbitMQ and PostgreSQL, publishing catalog records to Kafka.</li>
+                <li>Re-engineered a complex data migration from <b>several days to about 2 hours</b> with partitioned, parallel Redshift-to-PostgreSQL loads.</li>
+                <li>Cut query latency by <b>80%</b> by profiling bottlenecks, adding targeted indexes and replacing OFFSET scans with keyset pagination.</li>
+                <li>Designed the PostgreSQL schemas and Alembic migrations for a third-party music metadata platform, plus full and incremental loads and the matching workers for artists, albums, tracks, genres, bios and images.</li>
+                <li>Split heavy workloads into dedicated <b>ECS services</b> and built CloudWatch step-scaling on queue depth, so workers scale out under load and back in when queues drain.</li>
+                <li>Integrated a major label's content-delivery feed end to end: list and download workers, <b>Redis distributed locks</b>, delivery tracking, and New Relic and Slack alerting via a custom-metric Lambda.</li>
+                <li>Shipped rights and publishing features, including per-licensee takedowns, collaboration-artist publishing, product overrides and a <b>DDEX ERN 4.3</b> upgrade with acknowledgement tracking.</li>
+                <li>Built artist-management APIs (merge, associations, parallel relinking) and a bulk OpenSearch backfill; added a golden-file test framework for AWS Glue (PySpark) export jobs in CI.</li>
+              </ul>
+
+              <figure class="figure" aria-label="Diagram of a release moving through ingestion pipeline stages from ingest to publish">
+                <div class="figure-head"><span class="label">Fig. 3</span><span class="label">a release, end to end</span></div>
+                <div class="canvas">
+                  <svg class="pipe" viewBox="0 0 760 214" aria-hidden="true">
+                    <path class="wire" d="M98 64 H116 M204 64 H222 M310 64 H328 M416 64 H434 M522 64 H540 M628 64 H646"/>
+                    <g>
+                      <rect class="stage" x="10"  y="42" width="88" height="44" rx="6" style="animation-delay:0s"/>
+                      <rect class="stage" x="116" y="42" width="88" height="44" rx="6" style="animation-delay:1.05s"/>
+                      <rect class="stage" x="222" y="42" width="88" height="44" rx="6" style="animation-delay:2.1s"/>
+                      <rect class="stage" x="328" y="42" width="88" height="44" rx="6" style="animation-delay:3.15s"/>
+                      <rect class="stage" x="434" y="42" width="88" height="44" rx="6" style="animation-delay:4.2s"/>
+                      <rect class="stage" x="540" y="42" width="88" height="44" rx="6" style="animation-delay:5.25s"/>
+                      <rect class="stage" x="646" y="42" width="88" height="44" rx="6" style="animation-delay:6.3s"/>
+                    </g>
+                    <circle class="pkt-halo" cx="54" cy="20" r="9"/>
+                    <circle class="pkt" cx="54" cy="20" r="4"/>
+                    <text class="ntext" x="54"  y="68" text-anchor="middle">ingest</text>
+                    <text class="ntext" x="160" y="68" text-anchor="middle">validate</text>
+                    <text class="ntext" x="266" y="68" text-anchor="middle">normalize</text>
+                    <text class="ntext" x="372" y="68" text-anchor="middle">enrich</text>
+                    <text class="ntext" x="478" y="68" text-anchor="middle">rights</text>
+                    <text class="ntext" x="584" y="68" text-anchor="middle">transcode</text>
+                    <text class="ntext" x="690" y="68" text-anchor="middle">publish</text>
+                    <text class="ntext dim" x="54"  y="104" text-anchor="middle">sqs · ddex</text>
+                    <text class="ntext dim" x="160" y="104" text-anchor="middle">xsd</text>
+                    <text class="ntext dim" x="266" y="104" text-anchor="middle">persist</text>
+                    <text class="ntext dim" x="372" y="104" text-anchor="middle">metadata match</text>
+                    <text class="ntext dim" x="478" y="104" text-anchor="middle">licensing</text>
+                    <text class="ntext dim" x="584" y="104" text-anchor="middle">audio</text>
+                    <text class="ntext dim" x="690" y="104" text-anchor="middle">kafka · avro</text>
+                    <rect class="bus" x="10" y="130" width="724" height="30" rx="6"/>
+                    <text class="ntext dim" x="372" y="149" text-anchor="middle">rabbitmq queues · dramatiq workers · ecs autoscaling on queue depth</text>
+                    <text class="ntext warm" x="372" y="192" text-anchor="middle">postgresql · redshift · opensearch · redis · s3</text>
+                  </svg>
+                </div>
+                <figcaption class="mono">Each stage is a queue-backed worker pool, so a slow stage scales independently instead of holding up the rest.</figcaption>
+              </figure>
+
+              <ul class="tags" aria-label="Technologies"><li>Python</li><li>FastAPI</li><li>Dramatiq</li><li>RabbitMQ</li><li>PostgreSQL</li><li>SQLAlchemy</li><li>Alembic</li><li>Redshift</li><li>OpenSearch</li><li>Redis</li><li>Kafka</li><li>AWS ECS</li><li>AWS Glue</li><li>Terraform</li><li>New Relic</li></ul>
+            </div>
+          </article>
+
+          <article class="job">
+            <div class="job-when mono"><span>Jun 2021 – Sep 2023</span><span class="dur" data-from="2021-06" data-to="2023-09">2 yrs 3 mos</span></div>
+            <div>
+              <h3>Software Development Engineer I</h3>
+              <p class="org">Bijak (Krishnacharya Tech Pvt. Ltd.), Gurgaon</p>
+              <ul class="points">
+                <li>Architected and built a <b>mobile app backend from zero</b> on AWS serverless (Lambda, AppSync GraphQL, DynamoDB, Cognito, EventBridge, S3); it reached <b>10,000+ users</b> in launch week.</li>
+                <li>Reduced API and query latency by <b>55–70%</b> with Redis caching and database connection management.</li>
+                <li>Built a payment reconciliation service that detects missing and delayed payments, cutting operations effort by <b>60%</b>.</li>
+                <li>Delivered stock management, order feedback and other e-commerce features from design through release in an Agile team.</li>
+                <li>Ran security testing and vulnerability assessments covering SQL injection and data leakage.</li>
+                <li>Mentored interns and trainees through to full-time offers.</li>
+              </ul>
+              <ul class="tags" aria-label="Technologies"><li>AWS Lambda</li><li>AppSync</li><li>GraphQL</li><li>DynamoDB</li><li>Cognito</li><li>EventBridge</li><li>Redis</li></ul>
+            </div>
+          </article>
+
+          <article class="job">
+            <div class="job-when mono"><span>Sep 2020 – Jun 2021</span><span class="dur" data-from="2020-09" data-to="2021-06">9 mos</span></div>
+            <div>
+              <h3>Software Development Engineer I</h3>
+              <p class="org">BDFL Technologies (The10xAcademy), Hyderabad <span>· joined as a full-stack apprentice</span></p>
+              <ul class="points">
+                <li>Co-ran a coding bootcamp: defined the technical curriculum and mentored the cohort to a <b>90% placement rate</b>.</li>
+                <li>Built features for an ed-tech platform on <b>Go and React</b>.</li>
+                <li>Converted from full-stack apprentice (Sep 2020) to SDE I (Mar 2021).</li>
+              </ul>
+              <ul class="tags" aria-label="Technologies"><li>Go</li><li>React</li><li>JavaScript</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="block" id="capabilities" aria-labelledby="cap-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">What I do</span></div>
+      <div class="body">
+        <h2 id="cap-h">Where I add the most value.</h2>
+        <div class="caps">
+          <div class="cap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 14h5M20 14h5M8 9h12v10H8z"/><path d="M12 12v4M16 12v4"/></svg>
+            <h3>Event-driven pipelines</h3>
+            <p>Multi-stage ingestion on RabbitMQ, Kafka and SQS with Dramatiq or Celery workers. Retries with backoff, dead-letter redrive, prefetch tuning and queue-depth autoscaling.</p>
+          </div>
+          <div class="cap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="22" height="7" rx="2"/><rect x="3" y="16" width="22" height="7" rx="2"/><path d="M7 8.5h.01M7 19.5h.01"/></svg>
+            <h3>APIs &amp; backend services</h3>
+            <p>Typed FastAPI services with Pydantic contracts, plus Node.js and Django. REST and GraphQL, layered into API, CRUD, models and schemas, and covered by pytest.</p>
+          </div>
+          <div class="cap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><ellipse cx="14" cy="7" rx="9" ry="3"/><path d="M5 7v14c0 1.7 4 3 9 3s9-1.3 9-3V7M5 14c0 1.7 4 3 9 3s9-1.3 9-3"/></svg>
+            <h3>Data modeling &amp; performance</h3>
+            <p>PostgreSQL schema design and Alembic migrations, Redshift and SQL Server loads, OpenSearch indexing, Redis caching and locks, and query tuning that holds up at scale.</p>
+          </div>
+          <div class="cap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 20a5 5 0 0 1-.6-10A7 7 0 0 1 21 9a4.5 4.5 0 0 1-.5 11H8z"/><path d="m11 15 2 2 4-4"/></svg>
+            <h3>Cloud &amp; operability</h3>
+            <p>AWS ECS, Lambda, Glue and S3 provisioned with Terraform, shipped through GitHub Actions, and observed with New Relic, Logfire and OpenTelemetry, with runbooks for on-call.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section class="block" id="skills" aria-labelledby="skills-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">Skills</span></div>
+      <div class="body">
+        <h2 id="skills-h">Technical toolkit, by depth.</h2>
+        <p class="legend">
+          <span><i class="core-dot" aria-hidden="true"></i>Expert · deep production experience</span>
+          <span><i class="use-dot" aria-hidden="true"></i>Proficient · shipped to production</span>
+          <span><i class="fam-dot" aria-hidden="true"></i>Working knowledge</span>
+        </p>
+        <dl class="spec">
+          <div class="spec-row"><dt class="label">Languages</dt><dd><span class="sk core">Python</span><span class="sk core">SQL</span><span class="sk core">JavaScript</span><span class="sk core">TypeScript</span><span class="sk">Shell</span><span class="sk fam">Go</span><span class="sk fam">C++</span></dd></div>
+          <div class="spec-row"><dt class="label">Backend</dt><dd><span class="sk core">FastAPI</span><span class="sk core">Pydantic</span><span class="sk core">SQLAlchemy</span><span class="sk core">Node.js</span><span class="sk core">Express</span><span class="sk">Django</span><span class="sk">Flask</span><span class="sk">GraphQL</span><span class="sk">REST</span></dd></div>
+          <div class="spec-row"><dt class="label">Messaging</dt><dd><span class="sk core">RabbitMQ</span><span class="sk core">Dramatiq</span><span class="sk">Kafka · Avro</span><span class="sk">AWS SQS</span><span class="sk">Celery</span><span class="sk">EventBridge</span></dd></div>
+          <div class="spec-row"><dt class="label">Data stores</dt><dd><span class="sk core">PostgreSQL</span><span class="sk">Redshift</span><span class="sk">OpenSearch / Elasticsearch</span><span class="sk">Redis</span><span class="sk">SQL Server</span><span class="sk">DynamoDB</span><span class="sk">MongoDB</span><span class="sk">MySQL</span><span class="sk fam">Oracle</span></dd></div>
+          <div class="spec-row"><dt class="label">Data processing</dt><dd><span class="sk core">Alembic migrations</span><span class="sk">AWS Glue · PySpark</span><span class="sk">pandas</span><span class="sk">DDEX · XML / XSD</span></dd></div>
+          <div class="spec-row"><dt class="label">Cloud &amp; infra</dt><dd><span class="sk core">AWS ECS</span><span class="sk core">Terraform</span><span class="sk core">Docker</span><span class="sk">S3</span><span class="sk">Lambda</span><span class="sk">CloudWatch</span><span class="sk">AppSync</span><span class="sk">Cognito</span><span class="sk">Serverless</span></dd></div>
+          <div class="spec-row"><dt class="label">Observability</dt><dd><span class="sk core">New Relic</span><span class="sk">Logfire · OpenTelemetry</span><span class="sk">structlog</span><span class="sk">Sentry</span></dd></div>
+          <div class="spec-row"><dt class="label">Quality &amp; delivery</dt><dd><span class="sk core">pytest</span><span class="sk core">GitHub Actions</span><span class="sk">mypy</span><span class="sk">Git</span><span class="sk">Jenkins</span><span class="sk">Postman</span><span class="sk">Swagger</span></dd></div>
+          <div class="spec-row"><dt class="label">Frontend</dt><dd><span class="sk fam">React</span><span class="sk fam">Vue</span></dd></div>
+          <div class="spec-row"><dt class="label">Practices</dt><dd><span class="sk core">System design</span><span class="sk core">Team leadership</span><span class="sk core">Mentoring</span><span class="sk core">Code review</span><span class="sk">Security testing</span><span class="sk">Agile · Scrum</span><span class="sk">Runbooks</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="block" id="education" aria-labelledby="edu-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">Education</span></div>
+      <div class="body">
+        <h2 id="edu-h">Education.</h2>
+        <div class="edu">
+          <article><span class="label">2016 – 2020</span><h3>Bachelor of Technology (ECE)</h3><p>National Institute of Technology (NIT), Calicut</p></article>
+          <article><span class="label">2014 – 2016</span><h3>Higher Secondary, MPC</h3><p>Sri Chaitanya College, Guntur · 95.9%</p></article>
+          <article><span class="label">2014</span><h3>Secondary School Certificate</h3><p>Bell &amp; Bennett High School · CGPA 9.0</p></article>
+        </div>
+        <p class="spoken mono">Languages: English · Hindi · Telugu</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="block contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap block-grid">
+      <div class="rail"><span class="label">Contact</span></div>
+      <div class="body">
+        <h2 id="contact-h">Let's build something reliable.</h2>
+        <p class="intro">Open to <strong>remote roles worldwide</strong>: full-time, contract or through an employer of record, with working-hour overlap for US and EU teams. Email is the quickest way to reach me.</p>
+        <div class="channels">
+          <div class="channel"><span class="label">Email</span><a class="value" href="mailto:sathpadisaikiran@gmail.com">sathpadisaikiran@gmail.com</a><button class="copy" type="button" data-copy="sathpadisaikiran@gmail.com">Copy</button></div>
+          <div class="channel"><span class="label">Phone</span><a class="value" href="tel:+918309177006">+91 83091 77006</a><button class="copy" type="button" data-copy="+918309177006">Copy</button></div>
+          <div class="channel"><span class="label">LinkedIn</span><a class="value" href="https://linkedin.com/in/saikiran-sathpadi/" target="_blank" rel="noopener">in/saikiran-sathpadi</a><span></span></div>
+          <div class="channel"><span class="label">GitHub</span><a class="value" href="https://github.com/saikiransathpadi" target="_blank" rel="noopener">@saikiransathpadi</a><span></span></div>
+          <div class="channel"><span class="label">Résumé</span><a class="value" href="https://saikiransathpadi.github.io/resume.pdf" target="_blank" rel="noopener">Download PDF</a><button class="copy" type="button" data-copy="https://saikiransathpadi.github.io/resume.pdf" data-msg="Copied résumé link">Copy link</button></div>
+          <div class="channel"><span class="label">Remote setup</span><span class="value">UTC+5:30 · Slack, Jira, Confluence, GitHub</span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>© <span id="year">2026</span> Sai Kiran Sathpadi</span>
+    <a href="#main">Back to top ↑</a>
+  </div>
+</footer>
+
+<dialog class="palette" id="palette" aria-label="Command menu">
+  <input class="pal-input" id="pal-input" type="text" placeholder="Jump to a section or run a command…" autocomplete="off" spellcheck="false" aria-controls="pal-list" aria-autocomplete="list">
+  <div class="pal-list" id="pal-list" role="listbox"></div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(() => {
+  const d = document, root = d.documentElement, $ = (s, c = d) => c.querySelector(s), $$ = (s, c = d) => [...c.querySelectorAll(s)];
+  const EMAIL = 'sathpadisaikiran@gmail.com';
+
+  /* Durations stay current: years of experience and time in each role */
+  const now = new Date();
+  const ym = s => { const [y, m] = s.split('-').map(Number); return y * 12 + m - 1; };
+  const nowM = now.getFullYear() * 12 + now.getMonth();
+  const span = m => { const y = Math.floor(m / 12), r = m % 12, p = [];
+    if (y) p.push(y + (y === 1 ? ' yr' : ' yrs')); if (r) p.push(r + (r === 1 ? ' mo' : ' mos')); return p.join(' ') || '1 mo'; };
+  $$('.years').forEach(e => e.textContent = Math.floor((nowM - ym('2020-09')) / 12) + '+');
+  $$('[data-from]').forEach(e => e.textContent = span((e.dataset.to ? ym(e.dataset.to) : nowM) - ym(e.dataset.from)));
+  $('#year').textContent = now.getFullYear();
+
+  const clock = $('#clock');
+  const fmt = new Intl.DateTimeFormat('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false });
+  const tick = () => { clock.textContent = fmt.format(new Date()) + ' IST · UTC+5:30'; };
+  tick(); setInterval(tick, 30000);
+
+  /* Theme: dark unless the visitor chose light */
+  const themeBtn = $('#theme-toggle');
+  const isLight = () => root.dataset.theme === 'light';
+  const syncTheme = () => themeBtn.setAttribute('aria-label', isLight() ? 'Switch to dark theme' : 'Switch to light theme');
+  const toggleTheme = () => {
+    if (isLight()) delete root.dataset.theme; else root.dataset.theme = 'light';
+    try { localStorage.setItem('theme', isLight() ? 'light' : 'dark'); } catch (e) {}
+    syncTheme();
+  };
+  themeBtn.addEventListener('click', toggleTheme);
+  syncTheme();
+
+  /* Toast + copy */
+  const toast = $('#toast'); let toastTimer;
+  const say = (msg) => { toast.textContent = msg; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 1800); };
+  const copy = async (text, btn, msg) => {
+    try { await navigator.clipboard.writeText(text); }
+    catch (e) { say(text); return; }
+    say(btn?.dataset.msg || msg || 'Copied ' + text);
+    if (btn) { const label = btn.textContent; btn.dataset.done = ''; btn.textContent = 'Copied'; setTimeout(() => { delete btn.dataset.done; btn.textContent = label; }, 1600); }
+  };
+  $$('[data-copy]').forEach(b => b.addEventListener('click', () => copy(b.dataset.copy, b)));
+
+  /* Header border + active nav */
+  const header = $('#top');
+  addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 8), { passive: true });
+  const navLinks = $$('.nav a');
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    navLinks.forEach(a => a.setAttribute('aria-current', a.hash === '#' + e.target.id));
+  }), { rootMargin: '-45% 0px -50% 0px' });
+  $$('main section[id]').forEach(s => io.observe(s));
+
+  /* Scroll progress */
+  const bar = $('#progress');
+  let ticking = false;
+  const setProgress = () => { const max = root.scrollHeight - innerHeight; bar.style.transform = `scaleX(${max > 0 ? Math.min(1, scrollY / max) : 0})`; ticking = false; };
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(setProgress); } }, { passive: true });
+  setProgress();
+
+  /* Scroll reveal, chart drawing and count-up. Everything starts visible if this never runs. */
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const groups = [['.block h2, .block .intro, .legend', 0], ['.stat', .08], ['.job', .06], ['.cap', .07], ['.spec-row', .04], ['.edu article', .08], ['.channel', .05]];
+  const countUp = el => {
+    const to = +el.dataset.count, pre = el.dataset.pre || '', post = el.dataset.post || '', t0 = performance.now(), dur = 1200;
+    const step = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(to * (1 - Math.pow(1 - k, 3)));
+      el.textContent = pre + v + post; if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  };
+  if ('IntersectionObserver' in window && !reduced) {
+    const rv = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in'); rv.unobserve(e.target);
+      $$('[data-count]', e.target).forEach(countUp);
+    }), { rootMargin: '0px 0px -12% 0px', threshold: .15 });
+    groups.forEach(([sel, gap]) => {
+      const seen = new Map();
+      $$(sel).forEach(el => {
+        const parent = el.parentElement, i = seen.get(parent) || 0; seen.set(parent, i + 1);
+        el.classList.add('reveal'); el.style.setProperty('--d', (i * gap).toFixed(2) + 's'); rv.observe(el);
+      });
+    });
+    $$('.chart').forEach(c => rv.observe(c));
+  } else {
+    $$('.chart').forEach(c => c.classList.add('in'));
+  }
+
+  /* Pause figure animations while they're off-screen */
+  const figIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('paused', !e.isIntersecting)));
+  $$('.figure').forEach(f => figIO.observe(f));
+
+  /* Command palette */
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  $$('[data-mod]').forEach(k => k.textContent = isMac ? '⌘K' : 'Ctrl K');
+  const go = id => () => { const el = d.getElementById(id); el && el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); };
+  const open = url => () => { const a = d.createElement('a'); a.href = url; a.target = '_blank'; a.rel = 'noopener'; a.click(); };
+  const commands = [
+    { group: 'Go to', label: 'Impact', run: go('impact') },
+    { group: 'Go to', label: 'Experience', run: go('experience') },
+    { group: 'Go to', label: 'What I do', run: go('capabilities') },
+    { group: 'Go to', label: 'Skills', run: go('skills') },
+    { group: 'Go to', label: 'Education', run: go('education') },
+    { group: 'Go to', label: 'Contact', run: go('contact') },
+    { group: 'Actions', label: 'Copy email address', run: () => copy(EMAIL) },
+    { group: 'Actions', label: 'Open résumé (PDF)', run: open('https://saikiransathpadi.github.io/resume.pdf') },
+    { group: 'Actions', label: 'Copy résumé link', run: () => copy('https://saikiransathpadi.github.io/resume.pdf', null, 'Copied résumé link') },
+    { group: 'Actions', label: 'Switch light / dark theme', run: toggleTheme, key: 'T' },
+    { group: 'Links', label: 'LinkedIn', run: open('https://linkedin.com/in/saikiran-sathpadi/') },
+    { group: 'Links', label: 'GitHub', run: open('https://github.com/saikiransathpadi') },
+  ];
+  const pal = $('#palette'), input = $('#pal-input'), list = $('#pal-list');
+  let shown = [], sel = 0;
+  const render = () => {
+    const q = input.value.trim().toLowerCase();
+    shown = commands.filter(c => (c.label + ' ' + c.group).toLowerCase().includes(q));
+    sel = Math.min(sel, Math.max(shown.length - 1, 0));
+    list.textContent = '';
+    if (!shown.length) { list.innerHTML = '<p class="pal-empty mono">No matches. Try "skills" or "email".</p>'; return; }
+    let group;
+    shown.forEach((c, i) => {
+      if (c.group !== group) { group = c.group; const g = d.createElement('div'); g.className = 'pal-group label'; g.textContent = group; list.append(g); }
+      const b = d.createElement('button');
+      b.type = 'button'; b.className = 'pal-item'; b.role = 'option'; b.id = 'pal-' + i;
+      b.setAttribute('aria-selected', i === sel);
+      b.textContent = c.label;
+      if (c.key) { const k = d.createElement('kbd'); k.textContent = c.key; b.append(k); }
+      b.addEventListener('click', () => run(i));
+      b.addEventListener('mousemove', () => { if (sel !== i) { sel = i; mark(); } });
+      list.append(b);
+    });
+    input.setAttribute('aria-activedescendant', 'pal-' + sel);
+  };
+  const mark = () => { $$('.pal-item', list).forEach((b, i) => b.setAttribute('aria-selected', i === sel)); input.setAttribute('aria-activedescendant', 'pal-' + sel); $('#pal-' + sel)?.scrollIntoView({ block: 'nearest' }); };
+  const run = i => { const c = shown[i]; if (!c) return; pal.close(); c.run(); };
+  const openPalette = () => {
+    if (pal.open) return;
+    input.value = ''; sel = 0; render(); pal.showModal();
+    if (matchMedia('(pointer: coarse)').matches) list.querySelector('.pal-item')?.focus(); else input.focus();
+  };
+  $$('[data-open-palette]').forEach(b => b.addEventListener('click', openPalette));
+  pal.addEventListener('click', e => { if (e.target === pal) pal.close(); });
+  input.addEventListener('input', () => { sel = 0; render(); });
+  input.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); sel = (sel + 1) % shown.length; mark(); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); sel = (sel - 1 + shown.length) % shown.length; mark(); }
+    else if (e.key === 'Enter') { e.preventDefault(); run(sel); }
+  });
+  addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); pal.open ? pal.close() : openPalette(); return; }
+    const typing = /INPUT|TEXTAREA/.test(d.activeElement?.tagName) || d.activeElement?.isContentEditable;
+    if (!typing && !pal.open && !e.metaKey && !e.ctrlKey && !e.altKey) {
+      if (e.key === '/') { e.preventDefault(); openPalette(); }
+      else if (e.key.toLowerCase() === 't') toggleTheme();
+    }
+  });
+})();
+</script>
+</body>
+</html>
